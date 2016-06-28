@@ -19,5 +19,6 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell",  privileged: true,  path: "base.sh"
   config.vm.provision "shell",  privileged: false, path: "node_env.sh"
+  config.vm.provision "shell",  privileged: true,  path: "mongodb_env.sh"
 
 end
