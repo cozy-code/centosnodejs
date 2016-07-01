@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #load config file
-source ./config_value
+source /vagrant/config_value
 #nginx
 if !(which nginx >/dev/null); then
     #Install packeage
@@ -15,6 +15,9 @@ if !(which nginx >/dev/null); then
 
     #add read permission to root folder /home/vagrant/nginx/html
     chmod 711 /home/vagrant
+    mkdir -p  /home/vagrant/nginx/html
+    chown -R vagrant.vagrant /home/vagrant/nginx/
+    chmod 755 /home/vagrant/nginx/html
     #start as service
     /etc/init.d/nginx start
     chkconfig nginx on
