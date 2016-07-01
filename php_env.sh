@@ -1,5 +1,7 @@
 #!/bin/sh
 
+#load config file
+source ./config_value
 #nginx
 if !(which nginx >/dev/null); then
     #Install packeage
@@ -11,6 +13,8 @@ if !(which nginx >/dev/null); then
     mv -b /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.backup
     cp /vagrant/etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
+    #add read permission to root folder /home/vagrant/nginx/html
+    chmod 711 /home/vagrant
     #start as service
     /etc/init.d/nginx start
     chkconfig nginx on
@@ -19,8 +23,12 @@ fi
 #php
 if !(yum list installed | grep ^php > /dev/null); then
     #Install packeage
+    yum install epel-release
+    rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+
     yum update -y
-    yum -y install php-mysql php-common php php-cgi php-fpm php-gd php-mbstring
+    #yum -y install php-mysql php-common php php-cgi php-fpm php-gd php-mbstring
+    yum -y install --enablerepo=remi,remi-php56  php-common php php-cgi php-fpm php-gd php-mbstring
 
     # over write configuration
     mv -b /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.back
@@ -34,6 +42,7 @@ fi
 #MySQL
 if !(yum list installed | grep ^mysql-server > /dev/null); then
     #Install packeage
+    yum -y install http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
     yum update -y
     yum -y install mysql mysql-server
 
@@ -46,8 +55,7 @@ if !(yum list installed | grep ^mysql-server > /dev/null); then
     chkconfig mysqld on
 
     #set password
-    NEW_MYSQL_PASSWORD=vagrant
-    /usr/bin/mysqladmin -u root password "$NEW_MYSQL_PASSWORD"
-    /usr/bin/mysqladmin -u root --password=$NEW_MYSQL_PASSWORD-h localhost.localdomain password "$NEW_MYSQL_PASSWORD"
+    /usr/bin/mysqladmin -u root password "$MYSQL_ROOT_PASSWORD"
+    /usr/bin/mysqladmin -u root --password=$MYSQL_ROOT_PASSWORD -h localhost.localdomain password "$MYSQL_ROOT_PASSWORD"
 
 fi

@@ -1,0 +1,5 @@
+MYSQL_ROOT_PASSWORD=vagrant
+
+WORDPRESS_DB=wordpress
+WORDPRESS_DB_USER=wp_user
+WORDPRESS_DB_PASS=wp_pass
