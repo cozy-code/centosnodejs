@@ -20,5 +20,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell",  privileged: true,  path: "base.sh"
   config.vm.provision "shell",  privileged: false, path: "node_env.sh"
   config.vm.provision "shell",  privileged: true,  path: "mongodb_env.sh"
+  config.vm.provision "shell",  privileged: true,  path: "php_env.sh"
 
 end
