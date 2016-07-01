@@ -1,4 +1,6 @@
  "/.vagrant/" 
 .vagrant
 src/*
+!src/README.txt
 cert/*
+!cert/README.txt
