@@ -44,7 +44,7 @@ if !(yum list installed | grep ^php > /dev/null); then
 fi
 
 #composer
-if [ ! -e /usr/local/bin/composer]; then
+if [ ! -e /usr/local/bin/composer ]; then
     curl -sS https://getcomposer.org/installer | php
     mv composer.phar /usr/local/bin/composer
 else

@@ -1,5 +1,13 @@
 MYSQL_ROOT_PASSWORD=vagrant
 
+WORDPRESS_SITENAME="WP Test Site"
+WORDPRESS_SITEDESCRIPTION="The test tite on centos (vagrant)"
+WORDPRESS_URL=http://192.168.33.10/wordpress/
+
 WORDPRESS_DB=wordpress
 WORDPRESS_DB_USER=wp_user
 WORDPRESS_DB_PASS=wp_pass
+
+WORDPRESS_ADMIN_USER=wp_admin
+WORDPRESS_ADMIN_PASS=wp_pass
+WORDPRESS_ADMIN_MAIL=wpadmin@mail.ex.com
