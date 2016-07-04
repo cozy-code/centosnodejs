@@ -43,6 +43,14 @@ if !(yum list installed | grep ^php > /dev/null); then
     chkconfig php-fpm on
 fi
 
+#composer
+if [ ! -e /usr/local/bin/composer]; then
+    curl -sS https://getcomposer.org/installer | php
+    mv composer.phar /usr/local/bin/composer
+else
+    /usr/local/bin/composer self-update
+fi
+
 #MySQL
 if !(yum list installed | grep ^mysql-community-server > /dev/null); then
     #Install packeage
