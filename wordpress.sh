@@ -13,7 +13,9 @@ fi
 
 #create database for wordpress
 create_user=$(cat << EOS
-insert into user set user="${WORDPRESS_DB_USER}", password=password("${WORDPRESS_DB_PASS}"), host="localhost";
+insert into user (user,password,host)
+    select * from (SELECT "${WORDPRESS_DB_USER}", password("${WORDPRESS_DB_PASS}"), "localhost") as X
+    where not EXISTS (select user from user where user="${WORDPRESS_DB_USER}")
 EOS
 )
 create_db=$(cat << EOS

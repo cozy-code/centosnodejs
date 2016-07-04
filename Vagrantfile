@@ -24,3 +24,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell",  privileged: false,  path: "wordpress.sh"
 
 end
+
+# sudo yum erase nginx
+# chmod 700 /home/vagrant/
+# echo "drop database wordpress;" |  mysql -u root -p ; rm -r /home/vagrant/nginx/

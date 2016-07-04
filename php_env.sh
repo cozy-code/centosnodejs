@@ -12,13 +12,20 @@ if !(which nginx >/dev/null); then
 
     # over write configuration
     mv -b /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.backup
-    cp /vagrant/etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+    #cp /vagrant/etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+    sed  -e "s|\${WWWROOT}|$WWWROOT|" /vagrant/etc/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf
 
     #add read permission to root folder /home/vagrant/nginx/html
-    chmod 711 /home/vagrant
-    mkdir -p  /home/vagrant/nginx/html
-    chown -R vagrant.vagrant /home/vagrant/nginx/
-    chmod 755 /home/vagrant/nginx/html
+    #chmod 711 /home/vagrant
+    root_with_home=`echo $WWWROOT | grep -o -P '\/home\/.+?\/'`
+    if [ ! "$root_with_home" = "" ]; then
+        chmod 711 $root_with_home
+    fi
+
+    mkdir -p  $WWWROOT
+    usermod -aG nginx vagrant
+    chown -R nginx.nginx $WWWROOT
+    chmod -R 2770 $WWWROOT
     #start as service
     /etc/init.d/nginx start
     chkconfig nginx on
