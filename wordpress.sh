@@ -56,5 +56,11 @@ if [ ! -e $WP_DIR/wp-config.php ]; then
     php ~/bin/wp-cli.phar option update blogdescription "$WORDPRESS_SITEDESCRIPTION"
     php ~/bin/wp-cli.phar option update permalink_structure "/%postname%"
 
+    # git
+    curl https://raw.githubusercontent.com/github/gitignore/master/WordPress.gitignore > .gitignore
+    git init
+    git add .
+    git commit -am "Initial"
+
 fi
 

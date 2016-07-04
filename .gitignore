@@ -4,3 +4,4 @@ src/*
 !src/README.txt
 cert/*
 !cert/README.txt
+html/wordpress

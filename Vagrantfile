@@ -3,6 +3,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
 
   config.vm.synced_folder "src/", "/home/vagrant/src"
+  config.vm.synced_folder "html/", "/home/vagrant/html"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -25,6 +26,5 @@ Vagrant.configure("2") do |config|
 
 end
 
-# sudo yum erase nginx
-# chmod 700 /home/vagrant/
-# echo "drop database wordpress;" |  mysql -u root -p ; rm -r /home/vagrant/nginx/
+# sudo yum erase nginx -y; chmod 700 /home/vagrant/;  sudo rm -r /home/vagrant/nginx/
+# echo "drop database wordpress;" |  mysql -u root -p

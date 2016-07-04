@@ -1,6 +1,6 @@
 MYSQL_ROOT_PASSWORD=vagrant
 
-WWWROOT=/home/vagrant/nginx/html
+WWWROOT=/home/vagrant/html
 
 WORDPRESS_SITENAME="WP Test Site"
 WORDPRESS_SITEDESCRIPTION="The test tite on centos (vagrant)"
