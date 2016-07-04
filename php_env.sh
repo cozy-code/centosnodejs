@@ -2,6 +2,7 @@
 
 #load config file
 source /vagrant/config_value
+
 #nginx
 if !(which nginx >/dev/null); then
     #Install packeage
@@ -31,7 +32,7 @@ if !(yum list installed | grep ^php > /dev/null); then
 
     yum update -y
     #yum -y install php-mysql php-common php php-cgi php-fpm php-gd php-mbstring
-    yum -y install --enablerepo=remi,remi-php56  php-common php php-cgi php-fpm php-gd php-mbstring
+    yum -y install --enablerepo=remi,remi-php56 php-mysql php-common php php-cgi php-fpm php-gd php-mbstring
 
     # over write configuration
     mv -b /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.back
@@ -43,7 +44,7 @@ if !(yum list installed | grep ^php > /dev/null); then
 fi
 
 #MySQL
-if !(yum list installed | grep ^mysql-server > /dev/null); then
+if !(yum list installed | grep ^mysql-community-server > /dev/null); then
     #Install packeage
     yum -y install http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
     yum update -y

@@ -34,9 +34,9 @@ grant all on ${WORDPRESS_DB}.* to ${WORDPRESS_DB_USER};
 FLUSH PRIVILEGES;
 EOS
 )
-echo $create_db
-# if !(mysql -u root --password="$MYSQL_ROOT_PASSWORD" -e "show databases" | grep -q "^${WORDPRESS_DB}$"); then
-#     echo "createing ${WORDPRESS_DB}"
-#     echo $create_db
-#     # mysql -u root --password="$MYSQL_ROOT_PASSWORD" -D mysql <<< $create_db
-# fi
+#echo $create_db
+if !(mysql -u root --password="$MYSQL_ROOT_PASSWORD" -e "show databases" | grep -q "^${WORDPRESS_DB}$"); then
+    echo "createing ${WORDPRESS_DB}"
+#    echo $create_db
+     mysql -u root --password="$MYSQL_ROOT_PASSWORD" -D mysql <<< $create_db
+fi
