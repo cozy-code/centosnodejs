@@ -2,7 +2,6 @@
 
 source /vagrant/config_value
 
-wwwroot=~/nginx/html
 #install wp-cli
 if [ ! -e ~/bin/wp-cli.phar ]; then
     mkdir -p ~/bin
@@ -31,13 +30,20 @@ if !(mysql -u root --password="$MYSQL_ROOT_PASSWORD" -e "show databases" | grep 
      mysql -u root --password="$MYSQL_ROOT_PASSWORD" -D mysql <<< $create_db
 fi
 
+WP_DIR=$WWWROOT/wordpress
 #install wordpress
-if [ ! -e $wwwroot/wordpress/wp-config.php ]; then
-    php ~/bin/wp-cli.phar core download --locale=ja --path=$wwwroot/wordpress
+if [ ! -e $WP_DIR/wp-config.php ]; then
+    php ~/bin/wp-cli.phar core download --locale=ja --path=$WP_DIR
     sudo usermod -aG nginx vagrant
-    sudo chown -R nginx.nginx $wwwroot/wordpress
+    sudo chown -R nginx.nginx $WP_DIR
+    sudo chmod -R 2770 $WP_DIR/
 
-    cd $wwwroot/wordpress
+    cd $WP_DIR
+
+    #certificate
+    cp wp-includes/certificates/ca-bundle.crt wp-includes/certificates/ca-bundle.crt.org
+    cat wp-includes/certificates/ca-bundle.crt.org /usr/share/pki/ca-trust-source/anchors/* > wp-includes/certificates/ca-bundle.crt
+
     #db
     php ~/bin/wp-cli.phar core config --dbname=$WORDPRESS_DB --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASS --dbhost=localhost --dbprefix=wordpress_
 
