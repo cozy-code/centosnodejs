@@ -46,6 +46,7 @@ if [ ! -e $wwwroot/wordpress/wp-config.php ]; then
     php ~/bin/wp-cli.phar option update siteurl "$WORDPRESS_URL"
     php ~/bin/wp-cli.phar option update blogname "$WORDPRESS_SITENAME"
     php ~/bin/wp-cli.phar option update blogdescription "$WORDPRESS_SITEDESCRIPTION"
+    php ~/bin/wp-cli.phar option update permalink_structure "/%postname%"
 
 fi
 
