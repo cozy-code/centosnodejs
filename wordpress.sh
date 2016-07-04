@@ -6,7 +6,7 @@ source /vagrant/config_value
 if [ ! -e ~/bin/wp-cli.phar ]; then
     mkdir -p ~/bin
     cd ~/bin
-    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    curl -sS -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     php ~/bin/wp-cli.phar --info
 fi
 
@@ -37,7 +37,7 @@ WP_DIR=$WWWROOT/wordpress
 if [ ! -e $WP_DIR/wp-config.php ]; then
     php ~/bin/wp-cli.phar core download --locale=ja --path=$WP_DIR
     sudo usermod -aG nginx vagrant
-    sudo chown -R nginx.nginx $WP_DIR
+    sudo chown -R nginx:nginx $WP_DIR
     sudo chmod -R 2770 $WP_DIR/
 
     cd $WP_DIR
@@ -57,7 +57,7 @@ if [ ! -e $WP_DIR/wp-config.php ]; then
     php ~/bin/wp-cli.phar option update permalink_structure "/%postname%"
 
     # git
-    curl https://raw.githubusercontent.com/github/gitignore/master/WordPress.gitignore > .gitignore
+    curl -sS https://raw.githubusercontent.com/github/gitignore/master/WordPress.gitignore > .gitignore
     git init
     git add .
     git commit -am "Initial"

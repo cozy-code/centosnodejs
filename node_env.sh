@@ -3,7 +3,7 @@
 # -k: ignore SSL error
 if !(which nodebrew >/dev/null); then
     # install
-    curl -L git.io/nodebrew | perl - setup
+    curl -sSL git.io/nodebrew | perl - setup
     if !(grep -q "export PATH=$HOME/\.nodebrew/current/bin:" $HOME/.bash_profile); then
         echo "export PATH=$HOME/.nodebrew/current/bin:$PATH" >> $HOME/.bash_profile
         source $HOME/.bash_profile
