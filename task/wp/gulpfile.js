@@ -7,7 +7,7 @@ var browserSync = require('browser-sync');
 
 var theme_name="custom";
 
-var wp_dir='/home/vagrant/html/wordpress';
+var wp_dir='~/html/wordpress';
 var theme_dir=wp_dir+ "/wp-content/themes/" + theme_name;
 
 var scss_files_pattern=theme_dir + '/scss/*.scss';

@@ -1,6 +1,7 @@
 #!/bin/sh
 
-source /vagrant/config_value
+#load config file
+source ~/provision/config_value
 
 #install wp-cli
 if [ ! -e ~/bin/wp-cli.phar ]; then
@@ -36,7 +37,7 @@ WP_DIR=$WWWROOT/wordpress
 #install wordpress
 if [ ! -e $WP_DIR/wp-config.php ]; then
     php ~/bin/wp-cli.phar core download --locale=ja --path=$WP_DIR
-    sudo usermod -aG nginx vagrant
+    sudo usermod -aG nginx $USER
     sudo chown -R nginx:nginx $WP_DIR
     sudo chmod -R 2770 $WP_DIR/
 

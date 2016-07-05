@@ -11,9 +11,9 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc
 EOS
 )
 if !(which mongo >/dev/null); then
-    echo "$MONGO_REPO" > /etc/yum.repos.d/mongodb-org-3.2.repo
-    yum install -y mongodb-org
+    sudo echo "$MONGO_REPO" > /etc/yum.repos.d/mongodb-org-3.2.repo
+    sudo yum install -y mongodb-org
     #mkdir -p /data/db
-    chkconfig mongod on
-    /etc/init.d/mongod start
+    sudo chkconfig mongod on
+    sudo /etc/init.d/mongod start
 fi
