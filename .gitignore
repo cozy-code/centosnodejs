@@ -5,3 +5,4 @@ src/*
 cert/*
 !cert/README.txt
 html/wordpress
+node_modules/
