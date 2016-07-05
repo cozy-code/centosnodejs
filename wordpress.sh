@@ -68,14 +68,8 @@ fi
 wp_task_dir=~/task/wp
 if [ -e $wp_task_dir ]; then
     cd $wp_task_dir
+    #plese see package.json
     npm install
 
-    # npm init -y
-    # npm install --save-dev gulp
-    # npm install --save-dev gulp-sass
-    # npm install --save-dev gulp-autoprefixer
-    # npm install --save-dev gulp-cssmin
-    # npm install --save-dev gulp-rename
-    # npm install --save-dev browser-sync
-
+    # cd ~/task/wp; gulp
 fi
