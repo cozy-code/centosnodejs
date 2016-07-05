@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell",  privileged: false, path: "provision/mongodb_env.sh"
   config.vm.provision "shell",  privileged: false, path: "provision/php_env.sh"
   config.vm.provision "shell",  privileged: false, path: "provision/wordpress.sh"
+  config.vm.provision "shell",  privileged: false, path: "provision/docker_env.sh"
 
 end
 
