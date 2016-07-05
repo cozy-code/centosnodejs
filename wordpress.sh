@@ -65,17 +65,17 @@ if [ ! -e $WP_DIR/wp-config.php ]; then
 fi
 
 # task for wordpress
-wp_task_dir=~/src/wp
-if [ ! -e $wp_task_dir ]; then
-    mkdir -p $wp_task_dir
+wp_task_dir=~/task/wp
+if [ -e $wp_task_dir ]; then
     cd $wp_task_dir
-    npm init -y
-    npm install --save-dev gulp
-    npm install --save-dev gulp-sass
-    npm install --save-dev gulp-autoprefixer
-    npm install --save-dev gulp-cssmin
-    npm install --save-dev gulp-rename
-    npm install --save-dev browser-sync
+    npm install
 
-    cp /vagrant/etc/wp/gulpfile.js .
+    # npm init -y
+    # npm install --save-dev gulp
+    # npm install --save-dev gulp-sass
+    # npm install --save-dev gulp-autoprefixer
+    # npm install --save-dev gulp-cssmin
+    # npm install --save-dev gulp-rename
+    # npm install --save-dev browser-sync
+
 fi
