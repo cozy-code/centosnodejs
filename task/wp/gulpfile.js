@@ -5,19 +5,27 @@ var cssmin = require('gulp-cssmin');
 var rename = require('gulp-rename');
 var browserSync = require('browser-sync');
 
-var src='/home/vagrant/src';
+var theme_name="custom";
+
+var wp_dir='/home/vagrant/html/wordpress';
+var theme_dir=wp_dir+ "/wp-content/themes/" + theme_name;
+
+var scss_files_pattern=theme_dir + '/scss/*.scss';
 
 gulp.task('sass', function () {
-    gulp.src(src + '/wp/scss/*.scss')
+    console.log("-------sass--------");
+    gulp.src(scss_files_pattern)
+        //.pipe(sass({outputStyle: 'expanded'}))
         .pipe(sass())
         .pipe(autoprefixer(["last 2 version", "ie 8", "ie 7"]))
         .pipe(cssmin())
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest(src + '/wp/css'))
+        .pipe(gulp.dest(theme_dir + '/css'))
         .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('browser-sync', function () {
+    console.log("-------browser-sync--------");
     browserSync({
         //proxy: "wordpress.local"
         proxy: "http://192.168.33.10/wordpress"
@@ -25,11 +33,13 @@ gulp.task('browser-sync', function () {
 });
 
 gulp.task('bs-reload', function () {
+    console.log("-------bs-reload--------");
     browserSync.reload();
 });
 
 gulp.task('default', ['browser-sync'], function () {
-    gulp.watch("~/src/wp/scss/*.scss", ['sass']);
-    //gulp.watch("/path/to/wordpress/theme/*.php", ['bs-reload']);
+    console.log("watch:" + scss_files_pattern);
+    gulp.watch(scss_files_pattern, ['sass']);
+    gulp.watch(theme_dir + '*.php', ['bs-reload']);
 });
 
