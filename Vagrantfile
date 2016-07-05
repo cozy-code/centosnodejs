@@ -3,6 +3,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
 
   config.vm.synced_folder "src/", "/home/vagrant/src"
+  config.vm.synced_folder "task/", "/home/vagrant/task"
   config.vm.synced_folder "html/", "/home/vagrant/html",
        owner: "nginx", group: "nginx",
        mount_options: ["dmode=771,fmode=660"]

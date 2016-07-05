@@ -20,7 +20,7 @@ gulp.task('sass', function () {
 gulp.task('browser-sync', function () {
     browserSync({
         //proxy: "wordpress.local"
-        proxy: "localhost/wordpress"
+        proxy: "http://192.168.33.10/wordpress"
     });
 });
 
