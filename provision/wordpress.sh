@@ -33,7 +33,7 @@ if !(mysql -u root --password="$MYSQL_ROOT_PASSWORD" -e "show databases" | grep 
      mysql -u root --password="$MYSQL_ROOT_PASSWORD" -D mysql <<< $create_db
 fi
 
-WP_DIR=$WWWROOT/wordpress
+WP_DIR=$WWWROOT/$1
 #install wordpress
 if [ ! -e $WP_DIR/wp-config.php ]; then
     php ~/bin/wp-cli.phar core download --locale=ja --path=$WP_DIR
@@ -48,12 +48,12 @@ if [ ! -e $WP_DIR/wp-config.php ]; then
     cat wp-includes/certificates/ca-bundle.crt.org /usr/share/pki/ca-trust-source/anchors/* > wp-includes/certificates/ca-bundle.crt
 
     #db
-    php ~/bin/wp-cli.phar core config --dbname=$WORDPRESS_DB --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASS --dbhost=localhost --dbprefix=wordpress_
+    php ~/bin/wp-cli.phar core config --dbname=$WORDPRESS_DB --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASS --dbhost=localhost --dbprefix=$1_
 
     # setup
     php ~/bin/wp-cli.phar core install --url="$WORDPRESS_URL" --title="$WORDPRESS_SITENAME" --admin_user=$WORDPRESS_ADMIN_USER --admin_password=$WORDPRESS_ADMIN_PASS --admin_email=$WORDPRESS_ADMIN_MAIL
     php ~/bin/wp-cli.phar option update siteurl "$WORDPRESS_URL"
-    php ~/bin/wp-cli.phar option update blogname "$WORDPRESS_SITENAME"
+    php ~/bin/wp-cli.phar option update blogname "$2"
     php ~/bin/wp-cli.phar option update blogdescription "$WORDPRESS_SITEDESCRIPTION"
     php ~/bin/wp-cli.phar option update permalink_structure "/%postname%"
 
