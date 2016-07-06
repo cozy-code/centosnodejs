@@ -8,11 +8,7 @@ if !(which nodebrew >/dev/null); then
         echo "export PATH=$HOME/.nodebrew/current/bin:$PATH" >> $HOME/.bash_profile
         source $HOME/.bash_profile
     fi
-    # -k: ignore SSL error
-    #patch -uf $HOME/.nodebrew/current/bin/nodebrew < /vagrant/nodebrew.patch
 else
-    #patch -uf $HOME/.nodebrew/current/bin/nodebrew < /vagrant/nodebrew.patch
-    #cat $HOME/.nodebrew/current/bin/nodebrew
     echo 'nodebrew installed'
 fi
 
