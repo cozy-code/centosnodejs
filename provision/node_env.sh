@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 # -k: ignore SSL error
 if !(which nodebrew >/dev/null); then
     # install

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 #install mongo db
 MONGO_REPO=$(cat << 'EOS'
 [mongodb-org-3.2]

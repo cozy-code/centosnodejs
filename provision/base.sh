@@ -1,5 +1,6 @@
 #!/bin/sh
 
+set -x
 #import original root CA(s)
 sudo update-ca-trust enable
 sudo cp ~/provision/cert/* /usr/share/pki/ca-trust-source/anchors/

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 #load config file
 source ~/provision/config_value
 
@@ -34,6 +36,16 @@ if !(mysql -u root --password="$MYSQL_ROOT_PASSWORD" -e "show databases" | grep 
 fi
 
 WP_DIR=$WWWROOT/$1
+WP_URL=$WORDPRESS_HOST/$1/
+WP_LOCATION=$(cat << EOS
+# WordPress on sub folder
+location /$1/{
+    index  index.php index.html index.htm;
+    try_files \$uri \$uri/ /$1/index.php?q=\$uri&\$args;
+}
+EOS
+)
+
 #install wordpress
 if [ ! -e $WP_DIR/wp-config.php ]; then
     php ~/bin/wp-cli.phar core download --locale=ja --path=$WP_DIR
@@ -47,12 +59,15 @@ if [ ! -e $WP_DIR/wp-config.php ]; then
     cp wp-includes/certificates/ca-bundle.crt wp-includes/certificates/ca-bundle.crt.org
     cat wp-includes/certificates/ca-bundle.crt.org /usr/share/pki/ca-trust-source/anchors/* > wp-includes/certificates/ca-bundle.crt
 
+    # nginx config
+    sudo echo "$WP_LOCATION" | sudo tee /etc/nginx/conf.d/localhost.$1.sub
     #db
     php ~/bin/wp-cli.phar core config --dbname=$WORDPRESS_DB --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASS --dbhost=localhost --dbprefix=$1_
 
     # setup
-    php ~/bin/wp-cli.phar core install --url="$WORDPRESS_URL" --title="$WORDPRESS_SITENAME" --admin_user=$WORDPRESS_ADMIN_USER --admin_password=$WORDPRESS_ADMIN_PASS --admin_email=$WORDPRESS_ADMIN_MAIL
-    php ~/bin/wp-cli.phar option update siteurl "$WORDPRESS_URL"
+    php ~/bin/wp-cli.phar core install --url="$WP_URL" --title="$WORDPRESS_SITENAME" --admin_user=$WORDPRESS_ADMIN_USER --admin_password=$WORDPRESS_ADMIN_PASS --admin_email=$WORDPRESS_ADMIN_MAIL
+    php ~/bin/wp-cli.phar option update siteurl "$WP_URL"
+    php ~/bin/wp-cli.phar option update home "$WP_URL"
     php ~/bin/wp-cli.phar option update blogname "$2"
     php ~/bin/wp-cli.phar option update blogdescription "$WORDPRESS_SITEDESCRIPTION"
     php ~/bin/wp-cli.phar option update permalink_structure "/%postname%"

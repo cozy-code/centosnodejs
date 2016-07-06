@@ -5,7 +5,6 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "provision/", "/home/vagrant/provision"
   config.vm.synced_folder "src/", "/home/vagrant/src"
   config.vm.synced_folder "task/", "/home/vagrant/task"
-  # config.vm.synced_folder "html/", "/home/vagrant/html"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -21,16 +20,18 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell",  privileged: false, path: "provision/base.sh"
-  # config.vm.provision "shell",  privileged: false, path: "provision/node_env.sh"
-  # config.vm.provision "shell",  privileged: false, path: "provision/mongodb_env.sh"
-  # config.vm.provision "shell",  privileged: false, path: "provision/php_env.sh"
-  # config.vm.provision "shell",  privileged: false, path: "provision/wordpress.sh", args: ["wp1","Wordpress 1st"]
-  # config.vm.provision "shell",  privileged: false, path: "provision/wordpress.sh", args: ["wp2","Wordpress 2nd"]
+  config.vm.provision "shell",  privileged: false, path: "provision/node_env.sh"
+  config.vm.provision "shell",  privileged: false, path: "provision/mongodb_env.sh"
+  config.vm.provision "shell",  privileged: false, path: "provision/php_env.sh"
   config.vm.provision "shell",  privileged: false, path: "provision/docker_env.sh"
 
-  # config.vm.synced_folder "html/", "/home/vagrant/html"
-  #      ,owner: "nginx", group: "nginx"
-  #      ,mount_options: ["dmode=771,fmode=660"]
+  ##
+  ## remove comment out after php_env
+  ## and then exec > vagrant up --provision
+  ##
+  # config.vm.synced_folder "html/", "/home/vagrant/html" ,owner: "nginx", group: "nginx" ,mount_options: ["dmode=771,fmode=660"]
+  # config.vm.provision "shell",  privileged: false, path: "provision/wordpress.sh", args: ["wp1","Wordpress 1st"]
+  # config.vm.provision "shell",  privileged: false, path: "provision/wordpress.sh", args: ["wp2","Wordpress 2nd"]
 
 end
 
