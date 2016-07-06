@@ -5,9 +5,6 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "provision/", "/home/vagrant/provision"
   config.vm.synced_folder "src/", "/home/vagrant/src"
   config.vm.synced_folder "task/", "/home/vagrant/task"
-  config.vm.synced_folder "html/", "/home/vagrant/html",
-       owner: "nginx", group: "nginx",
-       mount_options: ["dmode=771,fmode=660"]
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -28,6 +25,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell",  privileged: false, path: "provision/php_env.sh"
   config.vm.provision "shell",  privileged: false, path: "provision/wordpress.sh"
   config.vm.provision "shell",  privileged: false, path: "provision/docker_env.sh"
+
+  config.vm.synced_folder "html/", "/home/vagrant/html",
+       owner: "nginx", group: "nginx",
+       mount_options: ["dmode=771,fmode=660"]
 
 end
 
