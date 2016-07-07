@@ -43,3 +43,7 @@ fi
 if !(npm ls -g less > /dev/null); then
     npm install -g less
 fi
+
+if !(npm ls -g npm-check-updates > /dev/null); then
+    npm install -g npm-check-updates
+fi

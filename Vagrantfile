@@ -22,8 +22,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision "base",           type:"shell",  privileged: false, path: "provision/base.sh"
   config.vm.provision "node_env",       type:"shell",  privileged: false, path: "provision/node_env.sh"
   config.vm.provision "mongodb_env",    type:"shell",  privileged: false, path: "provision/mongodb_env.sh"
-  config.vm.provision "php_env",        type:"shell",  privileged: false, path: "provision/php_env.sh"
-  config.vm.provision "docker_env",     type:"shell",  privileged: false, path: "provision/docker_env.sh"
+
+  # config.vm.provision "php_env",        type:"shell",  privileged: false, path: "provision/php_env.sh"
+  # config.vm.provision "docker_env",     type:"shell",  privileged: false, path: "provision/docker_env.sh"
 
   ##
   ## remove comment out after php_env
