@@ -19,11 +19,11 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell",  privileged: false, path: "provision/base.sh"
-  config.vm.provision "shell",  privileged: false, path: "provision/node_env.sh"
-  config.vm.provision "shell",  privileged: false, path: "provision/mongodb_env.sh"
-  config.vm.provision "shell",  privileged: false, path: "provision/php_env.sh"
-  config.vm.provision "shell",  privileged: false, path: "provision/docker_env.sh"
+  config.vm.provision "base",           type:"shell",  privileged: false, path: "provision/base.sh"
+  config.vm.provision "node_env",       type:"shell",  privileged: false, path: "provision/node_env.sh"
+  config.vm.provision "mongodb_env",    type:"shell",  privileged: false, path: "provision/mongodb_env.sh"
+  config.vm.provision "php_env",        type:"shell",  privileged: false, path: "provision/php_env.sh"
+  config.vm.provision "docker_env",     type:"shell",  privileged: false, path: "provision/docker_env.sh"
 
   ##
   ## remove comment out after php_env
@@ -34,6 +34,9 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell",  privileged: false, path: "provision/wordpress.sh", args: ["wp2","Wordpress 2nd"]
 
 end
+
+# pakeage after base provision
+# > vagrant up --provision-with base
 
 # rollbask
 # sudo yum erase nginx -y; chmod 700 /home/vagrant/;  rm -r /home/vagrant/html/*
