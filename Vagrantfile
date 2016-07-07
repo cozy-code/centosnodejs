@@ -12,8 +12,8 @@ Vagrant.configure("2") do |config|
 
   # Provider-specific configuration so you can fine-tune various
   config.vm.provider "virtualbox" do |vb|
-     # Customize the amount of memory on the VM:
-     vb.memory = "1024"
+    # Customize the amount of memory on the VM:
+    vb.memory = "1024"
   end
 
   # Enable provisioning with a shell script. Additional provisioners such as

@@ -2,13 +2,17 @@
 # http://qiita.com/pottava/items/452bf80e334bc1fee69a
 # docker pull centos:6.8
 # docker run -it centos:6.8 /bin/bash
+# <install>
 #  install component on container( write commands on this file)
 #  $eixt
 # docker commit  [CONTAINERNAME] vagrant/nginx
 # docker run -it vagrant/nginx /bin/bash
-#  goto install...
+#  goto <install>
 # docker rm $(docker ps -aq)
 # docker rm $(docker ps -f status=exited -q)
+#
+# <build>
+# docker build -t test-image .
 
 FROM centos:6.8
 
