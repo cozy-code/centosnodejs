@@ -8,3 +8,4 @@ html/wordpress
 node_modules/
 provision/cert/*
 !provision/cert/README.txt
+package.box

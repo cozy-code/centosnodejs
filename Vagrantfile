@@ -35,10 +35,14 @@ Vagrant.configure("2") do |config|
 
 end
 
-# pakeage after base provision
+# <<pakeage after base provision>>
 # > vagrant up --provision-with base
+# > vagrant halt
+# > vagrant package
+# > vagrant box add myCentOS65 package.box
+# replase config.vm.box = "CentOS65" to config.vm.box = "myCentOS65"
 
-# rollbask
+# <<rollback>>
 # sudo yum erase nginx -y; chmod 700 /home/vagrant/;  rm -r /home/vagrant/html/*
 # echo "drop database wordpress;" |  mysql -u root -p
 
