@@ -15,9 +15,13 @@ else
 fi
 
 
-# use stable version
-nodebrew install-binary stable
-nodebrew use stable
+# # use stable version
+# nodebrew install-binary stable
+# nodebrew use stable
+
+# # use LTS version
+nodebrew install-binary v4.x
+nodebrew use v4.x
 
 if !(which bower >/dev/null); then
     npm install -g bower
