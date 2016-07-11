@@ -3,7 +3,10 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
 
   config.vm.synced_folder "provision/", "/home/vagrant/provision"
-  config.vm.synced_folder "src/", "/home/vagrant/src"
+  #https://github.com/gulpjs/gulp/issues/448
+  # Mac ~$ sudo nfsd status
+  # nfsd service is enabled
+  config.vm.synced_folder "src/", "/home/vagrant/src", :nfs => true,:mount_options => ['actimeo=2']
   config.vm.synced_folder "task/", "/home/vagrant/task"
 
   # Create a private network, which allows host-only access to the machine
