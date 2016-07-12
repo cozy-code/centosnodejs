@@ -4,9 +4,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder "provision/", "/home/vagrant/provision"
   #https://github.com/gulpjs/gulp/issues/448
+  #https://www.jverdeyen.be/vagrant/speedup-vagrant-nfs/
   # Mac ~$ sudo nfsd status
   # nfsd service is enabled
-  config.vm.synced_folder "src/", "/home/vagrant/src", :nfs => true,:mount_options => ['actimeo=2']
+  config.vm.synced_folder "src/", "/home/vagrant/src", type: "nfs" , mount_options: ['actimeo=3']
   config.vm.synced_folder "task/", "/home/vagrant/task"
 
   # Create a private network, which allows host-only access to the machine
@@ -23,11 +24,11 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "base",           type:"shell",  privileged: false, path: "provision/base.sh"
-  config.vm.provision "node_env",       type:"shell",  privileged: false, path: "provision/node_env.sh"
-  config.vm.provision "mongodb_env",    type:"shell",  privileged: false, path: "provision/mongodb_env.sh"
+  # config.vm.provision "node_env",       type:"shell",  privileged: false, path: "provision/node_env.sh"
+  # config.vm.provision "mongodb_env",    type:"shell",  privileged: false, path: "provision/mongodb_env.sh"
 
   # config.vm.provision "php_env",        type:"shell",  privileged: false, path: "provision/php_env.sh"
-  # config.vm.provision "docker_env",     type:"shell",  privileged: false, path: "provision/docker_env.sh"
+  config.vm.provision "docker_env",     type:"shell",  privileged: false, path: "provision/docker_env.sh"
 
   ##
   ## remove comment out after php_env
