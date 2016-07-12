@@ -1,17 +1,21 @@
-FROM centos:6.8
+FROM node:5-slim
 
-#install nginx
 RUN set -x && \
-    yum install perl -y && \
-    curl -sSL git.io/nodebrew | perl - setup && \
-    echo "export PATH=$HOME/.nodebrew/current/bin:$PATH" >> $HOME/.bash_profile && \
-    source ~/.bash_profile && \
-    nodebrew install-binary v5.x && \
-    nodebrew use v5.x && \
-    npm install -g bower && \
-    npm install -g grunt-cli && \
-    npm install -g gulp && \
-    npm install -g yo && \
-    npm install -g generator-angular-fullstack && \
-    npm install -g less
+    apt-get -yq update && \
+    apt-get -yq install git net-tools sudo bzip2
 
+RUN set -x && \
+    npm install -g bower@1.7.9 grunt-cli@1.2.0 gulp@3.9.1 yo@1.8.4 && \
+    npm install -g generator-angular-fullstack@3.7.6
+
+# create working user
+RUN adduser --disabled-password --gecos "yeoman" yo && \
+    echo "yo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+ENV HOME /home/yo
+RUN mkdir /src && chown yo:yo /src
+WORKDIR /src
+
+USER yo
+
+CMD /bin/bash
